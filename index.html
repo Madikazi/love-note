@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To My Partner 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush:#ffe3ec;
+    --blush-2:#ffd0e0;
+    --rose:#e85d8a;
+    --hot:#ff4785;
+    --plum:#4a1d33;
+    --gold:#d4a574;
+    --cream:#fff8f9;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html,body{
+    height:100%;
+    background:linear-gradient(160deg,var(--blush) 0%,var(--blush-2) 55%,#ffc9dc 100%);
+    font-family:'Poppins',sans-serif;
+    color:var(--plum);
+    overflow-x:hidden;
+  }
+
+  /* ---------- LANDING VIEW ---------- */
+  #landing{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    text-align:center;
+    transition:opacity .6s ease, transform .6s ease;
+  }
+
+  #landing.hide{
+    opacity:0;
+    transform:scale(.92);
+    pointer-events:none;
+  }
+
+  .prompt{
+    font-family:'Dancing Script',cursive;
+    font-size:1.7rem;
+    color:var(--rose);
+    margin-bottom:2.2rem;
+    letter-spacing:.5px;
+  }
+
+  #heartBtn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    width:150px;
+    height:150px;
+    position:relative;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  #heartBtn svg{
+    width:100%;
+    height:100%;
+    filter:drop-shadow(0 10px 25px rgba(232,93,138,.45));
+    animation:beat 1.4s ease-in-out infinite;
+  }
+
+  @keyframes beat{
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.12);}
+    30%{transform:scale(0.98);}
+    45%{transform:scale(1.08);}
+    60%{transform:scale(1);}
+  }
+
+  .tap-hint{
+    margin-top:1.8rem;
+    font-size:.85rem;
+    color:var(--plum);
+    opacity:.55;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+
+  /* ---------- BURST HEARTS (on click) ---------- */
+  .burst-heart{
+    position:fixed;
+    font-size:1.4rem;
+    color:var(--hot);
+    pointer-events:none;
+    z-index:50;
+    animation:burst 1s ease-out forwards;
+  }
+
+  @keyframes burst{
+    to{
+      transform:translate(var(--tx),var(--ty)) scale(0);
+      opacity:0;
+    }
+  }
+
+  /* ---------- LETTER VIEW ---------- */
+  #letterView{
+    min-height:100vh;
+    position:relative;
+    display:none;
+    padding:4.5rem 1.4rem 6rem;
+    overflow:hidden;
+  }
+
+  #letterView.show{
+    display:block;
+    animation:fadeIn .9s ease both;
+  }
+
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(18px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* floating ambient hearts */
+  .floater{
+    position:absolute;
+    bottom:-10%;
+    color:var(--rose);
+    opacity:.35;
+    pointer-events:none;
+    animation:float linear infinite;
+    z-index:1;
+  }
+
+  @keyframes float{
+    0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0;}
+    10%{opacity:.45;}
+    90%{opacity:.35;}
+    100%{transform:translateY(-115vh) translateX(var(--drift)) rotate(360deg); opacity:0;}
+  }
+
+  .letter-card{
+    position:relative;
+    z-index:2;
+    max-width:560px;
+    margin:0 auto;
+    background:var(--cream);
+    border-radius:28px;
+    padding:2.6rem 2.1rem 2.9rem;
+    box-shadow:0 25px 60px -15px rgba(232,93,138,.35), 0 0 0 1px rgba(232,93,138,.08);
+  }
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:.6rem;
+  }
+
+  .to-line{
+    font-family:'Dancing Script',cursive;
+    font-size:2.3rem;
+    color:var(--hot);
+    text-align:center;
+    margin-bottom:1.6rem;
+  }
+
+  .letter-body{
+    font-family:'Playfair Display',serif;
+    font-size:1.05rem;
+    line-height:1.85;
+    color:var(--plum);
+  }
+
+  .letter-body p{
+    margin-bottom:1.2rem;
+  }
+
+  .signoff{
+    font-family:'Dancing Script',cursive;
+    font-size:1.9rem;
+    color:var(--rose);
+    text-align:right;
+    margin-top:1.6rem;
+  }
+
+  .divider{
+    width:60px;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:1.8rem auto;
+  }
+
+  .back-link{
+    display:block;
+    text-align:center;
+    margin-top:2.2rem;
+    font-size:.85rem;
+    letter-spacing:1px;
+    color:var(--plum);
+    opacity:.55;
+    text-decoration:none;
+    position:relative;
+    z-index:2;
+  }
+
+  .back-link:hover{opacity:.9;}
+
+  @media (max-width:420px){
+    .to-line{font-size:1.9rem;}
+    .letter-card{padding:2.1rem 1.5rem 2.4rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #heartBtn svg, .floater, .burst-heart{animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="landing">
+  <div class="prompt">tap the heart, babyyyy</div>
+  <button id="heartBtn" aria-label="Open love note">
+    <svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#ff4785" d="M16 28.5S1 19.4 1 9.9C1 4.9 4.9 1 9.7 1c2.9 0 5.4 1.4 6.3 3.6C16.9 2.4 19.4 1 22.3 1 27.1 1 31 4.9 31 9.9c0 9.5-15 18.6-15 18.6z"/>
+    </svg>
+  </button>
+  <div class="tap-hint">for you, forever</div>
+</div>
+
+<div id="letterView">
+  <div class="letter-card">
+    <div class="eyebrow">a little love note</div>
+    <div class="to-line">To my partner,</div>
+
+    <div class="letter-body">
+      <p>Oh, to love you and be loved by you. What a joy. You are my home, my peace, my joy, my light, and a breath of fresh air. I'm so grateful that you exist in this world. That someone like you walks this earth.</p>
+      <p>That I get to know you, talk to you, laugh with you, do life with you, pray with you, and simply exist with you. You make my life so much more beautiful.</p>
+      <p>Thank you for loving me in ways that remind me healthy love still exists. I hope we never stop loving each other. I want to grow old with you. I want to love you forever.</p>
+      <p>Years from now, I want it to still be you. You and me. Forever. ♾️ ❤️</p>
+    </div>
+
+    <div class="divider"></div>
+    <div class="signoff">I love you so much babyyyy 🥹🤍</div>
+  </div>
+
+  <a href="#" class="back-link" id="backLink">← back</a>
+</div>
+
+<script>
+  const heartBtn = document.getElementById('heartBtn');
+  const landing = document.getElementById('landing');
+  const letterView = document.getElementById('letterView');
+  const backLink = document.getElementById('backLink');
+
+  function spawnBurst(x, y){
+    const count = 18;
+    for(let i=0;i<count;i++){
+      const h = document.createElement('div');
+      h.className = 'burst-heart';
+      h.textContent = ['💗','💕','❤️','💓'][Math.floor(Math.random()*4)];
+      const angle = (Math.PI * 2 * i) / count + Math.random()*0.5;
+      const dist = 120 + Math.random()*160;
+      h.style.setProperty('--tx', Math.cos(angle)*dist + 'px');
+      h.style.setProperty('--ty', Math.sin(angle)*dist + 'px');
+      h.style.left = x + 'px';
+      h.style.top = y + 'px';
+      h.style.fontSize = (1 + Math.random()*1.2) + 'rem';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 1100);
+    }
+  }
+
+  function spawnFloaters(){
+    const emojis = ['💗','💕','🤍','❤️'];
+    const total = 22;
+    for(let i=0;i<total;i++){
+      const f = document.createElement('div');
+      f.className = 'floater';
+      f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      f.style.left = Math.random()*100 + '%';
+      f.style.fontSize = (0.9 + Math.random()*1.6) + 'rem';
+      const duration = 9 + Math.random()*10;
+      f.style.setProperty('--drift', (Math.random()*160 - 80) + 'px');
+      f.style.animationDuration = duration + 's';
+      f.style.animationDelay = (Math.random()*duration) + 's';
+      letterView.appendChild(f);
+    }
+  }
+
+  spawnFloaters();
+
+  heartBtn.addEventListener('click', (e)=>{
+    const rect = heartBtn.getBoundingClientRect();
+    spawnBurst(rect.left + rect.width/2, rect.top + rect.height/2);
+
+    setTimeout(()=>{
+      landing.classList.add('hide');
+      letterView.classList.add('show');
+      window.scrollTo({top:0, behavior:'instant'});
+    }, 350);
+  });
+
+  backLink.addEventListener('click', (e)=>{
+    e.preventDefault();
+    letterView.classList.remove('show');
+    landing.classList.remove('hide');
+  });
+</script>
+
+</body>
+</html>
